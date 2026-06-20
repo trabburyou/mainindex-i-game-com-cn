@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时时彩 · 知识库入口</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fafaf9;
+            font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+            color: #1c1917;
+            line-height: 1.7;
+            padding: 2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .page {
+            max-width: 700px;
+            width: 100%;
+        }
+
+        /* header */
+        .site-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e7e5e4;
+        }
+
+        .site-header h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: -0.01em;
+            color: #292524;
+            margin-bottom: 0.4rem;
+        }
+
+        .site-header .sub {
+            color: #78716c;
+            font-size: 0.95rem;
+        }
+
+        /* hero 区 — 温和提醒 */
+        .hero-note {
+            background: #f5f0eb;
+            border-radius: 18px;
+            padding: 2rem 2rem 2.2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .hero-note h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #1c1917;
+            margin-bottom: 0.6rem;
+        }
+
+        .hero-note p {
+            font-size: 1rem;
+            color: #44403c;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-note .reminder {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0.9rem 1.2rem;
+            border-radius: 60px;
+            margin-top: 1.2rem;
+            font-size: 0.95rem;
+            color: #292524;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+
+        /* 目录感布局 — 卡片式知识区块 */
+        .knowledge-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            margin-bottom: 3rem;
+        }
+
+        .card-module {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.02), 0 2px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #edebe9;
+            transition: box-shadow 0.2s;
+        }
+
+        .card-module:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .card-module h3 {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            color: #292524;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .card-module h3 span {
+            background: #e7e5e4;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.7rem;
+            border-radius: 40px;
+            color: #57534e;
+            font-weight: 400;
+        }
+
+        .card-module p, .card-module li {
+            font-size: 0.98rem;
+            color: #44403c;
+        }
+
+        .card-module ul {
+            list-style: none;
+            margin-top: 0.4rem;
+        }
+
+        .card-module ul li {
+            padding: 0.3rem 0 0.3rem 1.2rem;
+            position: relative;
+        }
+
+        .card-module ul li::before {
+            content: "·";
+            position: absolute;
+            left: 0;
+            color: #a8a29e;
+            font-weight: bold;
+        }
+
+        .inline-link {
+            color: #57534e;
+            text-decoration: none;
+            border-bottom: 1px solid #cac4c0;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #292524;
+            color: #1c1917;
+        }
+
+        /* 提示区 */
+        .tip-area {
+            background: #f5f0eb;
+            border-radius: 18px;
+            padding: 1.6rem 2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .tip-area h4 {
+            font-weight: 500;
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            color: #292524;
+        }
+
+        .tip-area p {
+            font-size: 0.96rem;
+            color: #44403c;
+        }
+
+        /* 相关信息区 + FAQ摘要 */
+        .related-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            margin-bottom: 2.8rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px dashed #e7e5e4;
+            padding: 0.8rem 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 500;
+            color: #292524;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-item span {
+            font-size: 0.9rem;
+            color: #57534e;
+        }
+
+        /* footer */
+        .site-footer {
+            margin-top: 1.2rem;
+            padding-top: 1.6rem;
+            border-top: 1px solid #edebe9;
+            font-size: 0.85rem;
+            color: #a8a29e;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .site-footer a {
+            color: #78716c;
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            color: #292524;
+        }
+
+        /* 响应式 */
+        @media (max-width: 550px) {
+            body {
+                padding: 1.2rem 0.8rem;
+            }
+
+            .site-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-note {
+                padding: 1.4rem 1.2rem;
+            }
+
+            .card-module {
+                padding: 1.4rem 1.2rem;
+            }
+
+            .hero-note .reminder {
+                font-size: 0.9rem;
+                padding: 0.6rem 1rem;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="site-header">
+            <h1>时时彩 · 知识库</h1>
+            <div class="sub">信息聚合 · 理性参考 · 持续关注</div>
+        </header>
+
+        <!-- hero 温和说明区 -->
+        <section class="hero-note">
+            <h2>再次回来 保持连接</h2>
+            <p>如果您曾经浏览过关于<span class="inline-link" href="https://ssc-lottery.com">时时彩</span>的内容，这个页面可作为您重新熟悉和收藏的中间站。我们不做多余渲染，只把基本信息、常见关注点以及延伸阅读线索整理出来，方便您随时回来翻阅。</p>
+            <div class="reminder">✨ 建议加入浏览器收藏夹，或记下页面特征，日后需要时快速定位。</div>
+        </section>
+
+        <!-- 目录感布局：知识卡片 -->
+        <div class="knowledge-grid">
+            <div class="card-module">
+                <h3>📋 基本说明 <span>background</span></h3>
+                <p><a href="https://ssc-lottery.com" class="inline-link">时时彩</a>是一种高频数字游戏形式，其开奖频率较高，周期通常以分钟计。参与者根据每期开出的数字组合判断结果。平台提供实时开奖信息、历史走势以及相关规则说明。了解基本机制是合理参与的前提。</p>
+            </div>
+
+            <div class="card-module">
+                <h3>🧭 常用场景 <span>usage</span></h3>
+                <ul>
+                    <li>查看最新开奖号码与历史趋势</li>
+                    <li>对比不同时间段的出号分布</li>
+                    <li>利用平台提供的统计工具辅助观察</li>
+                    <li>关注规则变动及平台公告</li>
+                </ul>
+                <p style="margin-top: 0.8rem;">上述场景均基于信息获取目的，不构成任何操作建议。</p>
+            </div>
+
+            <div class="card-module">
+                <h3>📌 持续关注的几个理由 <span>why bookmark</span></h3>
+                <p>对于长期留意<span class="inline-link" href="https://ssc-lottery.com">时时彩</span>动态的朋友，定期回溯开奖数据、观察周期特征，是形成个人认知的基础。平台偶尔也会更新界面或调整规则，收藏入口可以确保您第一时间接触到最直接的展示页面。</p>
+            </div>
+        </div>
+
+        <!-- 提示区：温和提醒 -->
+        <div class="tip-area">
+            <h4>💡 提醒与建议</h4>
+            <p>任何与数字概率相关的活动都带有随机性。本页仅作为信息归纳，不鼓励过度参与。请保持理性，将主要精力放在生活与工作中。如您只是路过，也欢迎大致浏览——也许这里的整理能帮您节省一些搜寻时间。</p>
+        </div>
+
+        <!-- 相关信息区 + FAQ摘要 -->
+        <div class="related-info">
+            <div class="faq-item">
+                <strong>❓ 如何快速找到最新开奖结果？</strong>
+                <span>进入 <a href="https://ssc-lottery.com" class="inline-link">时时彩</a> 页面后，首页通常设有显眼的开奖模块，无需额外点击即可看到最近一期号码。大部分数据按时间倒序排列。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ 往期数据能查多久？</strong>
+                <span>历史记录一般保留近数十期至近百期，具体范围可见页面下拉菜单或「历史数据」分类。如需更早期记录，可关注平台是否提供归档功能。</span>
+            </div>
+            <div class="faq-item">
+                <strong>❓ 页面访问不稳定怎么办？</strong>
+                <span>可尝试清理浏览器缓存或更换网络环境。建议直接通过收藏夹或浏览器地址栏输入熟悉链接进入，避免经过非官方中间页。</span>
+            </div>
+        </div>
+
+        <footer class="site-footer">
+            <span>知识库 · 非官方介绍</span>
+            <span>
+                <a href="https://ssc-lottery.com" target="_blank" rel="noopener">时时彩</a> · 信息参考
+            </span>
+        </footer>
+    </div>
+</body>
+</html>
